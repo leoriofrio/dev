@@ -1,0 +1,53 @@
+<div class="contanier">
+    <button type="button" (click)="tab1=true;tab2=false;">Mostrar</button>
+    <button type="button" (click)="tab2=true;tab1=false;">Ocultar</button>
+</div>
+
+<div class="contanier" [hidden]="!tab1">
+    <input
+    type="text"
+    style="padding:8px;margin:15px auto;width:30%;"
+    placeholder="Type to filter the name column..."
+    (keyup)="updateFilter($event)"
+  />
+
+  <ngx-datatable  
+        #table
+        class="material"
+        style="top: 20px; background-color:white"        
+        [loadingIndicator]="loadingIndicator"        
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"        
+        [reorderable]="reorderable"        
+        [scrollbarH]="true"
+
+        [limit]="4"
+        [rowHeight]="'auto'"
+        [rows]="rows"
+        [columns] = 'columns'
+  >
+  <ngx-datatable-column name="Name" [width]="20">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+      <span
+        title="Double click to edit"
+        (dblclick)="editing[rowIndex + '-name'] = true"
+        *ngIf="!editing[rowIndex + '-name']">
+        {{value}}
+      </span>
+      <input
+        autofocus
+        (blur)="updateValue($event, 'name', rowIndex)"
+        *ngIf="editing[rowIndex+ '-name']"
+        type="text"
+        [value]="value"
+      />
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Gender" [width]="40"></ngx-datatable-column>
+  <ngx-datatable-column name="Age" [width]="20"></ngx-datatable-column>
+  <ngx-datatable-column name="Company" [width]="60"></ngx-datatable-column>
+  <ngx-datatable-column name="Address" [width]="80"></ngx-datatable-column>
+  </ngx-datatable>
+ 
+</div>

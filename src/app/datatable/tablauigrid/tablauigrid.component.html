@@ -1,0 +1,11 @@
+<!--
+  <div ng-controller="MainCtrl as $ctrl">
+    <div id="grid1" ui-grid="{ data: $ctrl.myData }" class="gridOptions"></div>
+  </div>
+-->
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ui-grid [data]="employee" [gridOptions]="gridOptions" (onEdit)="onEditFunction($event)"></ui-grid>
+  </div>
+</div>
+
